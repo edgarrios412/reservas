@@ -8,15 +8,15 @@ module.exports = (sequelize) => {
     },
     title: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     end: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     start:{
       type: DataTypes.STRING,
       defaultValue:"https://st3.depositphotos.com/23594922/31822/v/600/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg"
     },
-  });
+  },{timestamps:false});
 };
