@@ -8,9 +8,11 @@ import dayjs from "dayjs";
 import { useEffect } from "react";
 import { Calendar, dayjsLocalizer } from 'react-big-calendar';
 import 'dayjs/locale/es'
+import localizedFormat from 'dayjs/plugin/localizedFormat';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 dayjs.locale("es");
+dayjs.extend(localizedFormat)
 function App() {
   const [fecha, setFecha] = useState(null);
   const [hora, setHora] = useState(null);
@@ -33,8 +35,8 @@ function App() {
     setDate([...date, fecha+hora])
     setArray([...array, {
       title:"Cliente",
-      start: new Date(fecha+'T'+hora+':00:00.123Z'),
-      end:new Date(fecha+'T'+(Number(hora)+1)+':00:00.123Z'),
+      start: new Date(fecha+'T'+hora+':00:00'),
+      end:new Date(fecha+'T'+(Number(hora)+1)+':00:00'),
       isDraggable:true,
     }]);
     if(date.filter( a => a.includes(fecha)).length > 4){
@@ -55,6 +57,13 @@ function App() {
 //     end: new Date('2023-04-04T17:30:00')
 //   },
 // ];
+
+const formats = {
+  timeGutterFormat: (date, culture, localizer) =>
+    localizer.format(date, 'h:mm A', culture), // Formato de 12 horas AM-PM
+  eventTimeRangeFormat: ({ start, end }, culture, localizer) =>
+    `${localizer.format(start, 'h:mm A', culture)} - ${localizer.format(end, 'h:mm A', culture)}`, // Formato de 12 horas AM-PM para eventos
+};
 
   return (
     <>
@@ -79,12 +88,22 @@ function App() {
           </div>
         </>
       )}
-      <div style={{marginTop:"25px"}}>
+      <div style={{marginTop:"25px", height:"80vh"}}>
       <Calendar
       localizer={localizer}
         events={array}
         startAccessor="start"
         endAccessor="end"
+        messages={{
+          next: "Siguiente",
+          previous: "Anterior",
+          today: "Hoy",
+          month: "Mes",
+          week: "Semana",
+          day: "Día",
+          noEventsInRange:"No hay eventos en el rango de fecha seleccionado"
+        }}
+        formats={formats}
       />
     </div>
     </>
