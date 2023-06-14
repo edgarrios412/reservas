@@ -1,0 +1,122 @@
+.ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.li{
+    background-color: rgba(238, 238, 238, 0.493);
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 15px 30px;
+    cursor: pointer;
+    text-align: start;
+    transition: .3s;
+}
+
+.li span{
+    color: rgb(131, 131, 131);
+    font-weight: 500;
+}
+
+.li:hover{
+    color: #07a889;
+    scale: 1.02;
+    box-shadow: 0px 5px 5px 5px rgba(225, 225, 225, 0.141);
+}
+
+.horas{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    /* background-color: red; */
+    width: 400px;
+}
+
+.hora{
+    width: 80px;
+}
+
+.bg{
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.548);
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    animation: aparecer .2s ease-in-out forwards;
+}
+
+@keyframes aparecer{
+    100%{
+        opacity:1
+    }
+}
+
+.modal{
+    background-color: white;
+    width: 400px;
+    height: 450px;
+    border-radius: 10px;
+}
+
+.icon{
+    margin-top: 30px;
+    scale: 0;
+    animation: saltar .3s .3s ease-in-out forwards;
+}
+
+@keyframes saltar{
+    70%{
+        scale:1.08
+    }
+    100%{
+        scale: 1;
+    }
+}
+
+.desc{
+    color: rgb(53, 53, 53);
+    padding: 0px 60px;
+    margin-bottom: 50px;
+}
+
+.title{
+    font-weight: 500;
+}
+
+.buttons{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.accept{
+    background-color: #07a889;
+    cursor: pointer;
+    transition: .3s;
+    border: 2px solid #079579;
+}
+
+.accept:hover{
+    border: 2px solid #004d3e;
+}
+
+.denied{
+    background-color: transparent;
+    color: black;
+    border: 1px solid transparent;
+}
+
+.denied:hover{
+    border: 1px solid #8a0000;
+    color: #620000;
+}
