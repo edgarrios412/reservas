@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import sumMinutes from "../../helpers/sumMinutes";
 import divideHours from "../../helpers/divideHours";
 import icon from "../../assets/icon.png"
+import services from "../services.js"
 
 dayjs.locale("es");
 
@@ -30,6 +31,7 @@ const User = () => {
     disable: disable
   };
   const [date, setDates] = useState([]);
+  const [expertId, setExpertId] = useState(null);
 
 
   const horas = divideHours("07:00","13:00");
@@ -69,7 +71,7 @@ const User = () => {
           <div className={style.modal}>
           <img className={style.icon} src={icon}/>
           <h2 className={style.title}>Estas a punto de reservar</h2>
-          <p className={style.desc}>Queremos corroborar que estés seguro de hacer tu reservacion para el dia <b>{fecha}</b> a las <b>{hora}</b></p>
+          <p className={style.desc}>Queremos corroborar que estés seguro de hacer tu reservacion para el dia <b>{fecha}</b> a las <b>{hora}</b> con <b>{expertId == 1 ? "Edgar Vilchez" : "Pedro Lopez"}</b></p>
           <div className={style.buttons}>
             <button className={style.accept} onClick={() => selectHora(hora)}>Si quiero</button>
             <button className={style.denied} onClick={() => setModal(false)}>No quiero</button>
@@ -83,13 +85,20 @@ const User = () => {
         <div>
           <h1>Selecciona un servicio</h1>
           <ul className={style.ul}>
-            <li className={style.li} onClick={() => {setStep(step + 1); setDuration(40)}}>Cejas policarbonata<br></br><span>40 minutos</span></li>
-            <li className={style.li} onClick={() => {setStep(step + 1); setDuration(60)}}>Pestaña punta a punta<br></br><span>1 hora</span></li>
-            <li className={style.li} onClick={() => {setStep(step + 1); setDuration(20)}}>Despunte de cabello<br></br><span>20 minutos</span></li>
+            {services.map(s => <li className={style.li} onClick={() => {setStep(step + 1); setDuration(s.duration)}}>{s.title}<br></br><span>{s.duration} minutos</span></li>)}
           </ul>
         </div>
       )}
       {step == 1 && (
+        <>
+        <h1>Selecciona el profesional</h1>
+        <div style={{display:"flex", flexDirection:"column", gap:"20px"}}>
+        <button onClick={() => {setStep(step+1); setExpertId(1);}}>Edgar Vilchez</button>
+        <button onClick={() => {setStep(step+1); setExpertId(2);}}>Pedro Lopez</button>
+        </div>
+        </>
+      )}
+      {step == 2 && (
         <Flatpickr
           value={fecha}
           style={{ padding: "5px 15px", borderRadius: "10px", border: "none" }}

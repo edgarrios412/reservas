@@ -1,4 +1,4 @@
-// import style from './Admin.module.css'
+import style from './Admin.module.css'
 import { useEffect, useState } from "react";
 import { Calendar, dayjsLocalizer } from "react-big-calendar";
 import localizedFormat from "dayjs/plugin/localizedFormat";
@@ -31,16 +31,26 @@ const Admin = () => {
 
   const localizer = dayjsLocalizer(dayjs);
 
-  // const eventStyleGetter = (event, start, end, isSelected) => {
-  //   const backgroundColor = event.id === 16 ? 'blue' : 'red'; // Cambiar colores según el empleado
-
-  //   return {
-  //     style: {
-  //       backgroundColor,
-  //     },
-  //   };
-  // };
-
+  const eventStyleGetter = (event, start, end, isSelected) => {
+    // TODO: Deberia seleccionar el color dependiendo del profesional que escogio
+    var style = {
+        backgroundColor: event.color,
+        color: 'black',
+    };
+    return {
+        style: style
+    };
+}
+const resources = [{
+  id: 'a',
+  title: 'Room A'
+}, {
+  id: 'b',
+  title: 'Room B'
+}, {
+  id: 'c',
+  title: 'Room C'
+}]
 
   return (
     <>
@@ -52,19 +62,16 @@ const Admin = () => {
             return{
             title:d.title,
             start:new Date(d.start),
-            end:new Date(d.end)
+            end:new Date(d.end),
+            color:"grey"
             }
         })}
+        resources={resources}
+        eventPropGetter={(eventStyleGetter)}
         startAccessor="start"
         endAccessor="end"
-        // views={['day']}
-        // defaultView="day"
-        // defaultDate={new Date()}
-        // selectable
-        // onSelectEvent={(event) => console.log(event)}
-        // onSelectSlot={(slotInfo) => console.log(slotInfo)}
-        // multiselect
-        // eventPropGetter={eventStyleGetter}
+        onSelectEvent={() => console.log("TODO: Al hacer click deberia de poder ver mas info y editar")}
+        multiselect
         messages={{
           next: "Siguiente",
           previous: "Anterior",
@@ -78,6 +85,7 @@ const Admin = () => {
           }
         }}
         formats={formats}
+        
       />
     </div>
     </>

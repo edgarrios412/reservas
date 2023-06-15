@@ -18,6 +18,10 @@
   background-color: red;
 }
 
+.rbc-event{
+  background-color: red; /* Cambia "red" por el color deseado */
+}
+
 a {
   font-weight: 500;
   color: #646cff;
