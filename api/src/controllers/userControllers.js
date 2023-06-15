@@ -5,6 +5,14 @@ module.exports = {
         const users = await User.findAll()
         return users
     },
+    getEmployees: async (id) => {
+        const users = await User.findAll({
+            where:{
+                companyId:id
+            }
+        })
+        return users
+    },
     postUser: async (user) => {
         await User.create(user)
         return "Registrado correctamente"

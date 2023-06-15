@@ -6,16 +6,19 @@ import dayjs from "dayjs";
 import "dayjs/locale/es";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import axios from "axios"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 dayjs.locale("es");
 dayjs.extend(localizedFormat);
 
 const Admin = () => {
     const [date, setDate] = useState([])
+    const {id} = useParams()
+    const [employees, setEmployees] = useState()
 
     useEffect(() => {
-        axios.get("/date").then((data) => setDate(data.data))
+        axios.get(`/date/${id}`).then((data) => setDate(data.data))
+        axios.get(`/user/${id}`).then((data) => setEmployees(data.data))
     },[])
 
   const formats = {
@@ -33,28 +36,19 @@ const Admin = () => {
 
   const eventStyleGetter = (event, start, end, isSelected) => {
     // TODO: Deberia seleccionar el color dependiendo del profesional que escogio
-    var style = {
-        backgroundColor: event.color,
-        color: 'black',
-    };
-    return {
-        style: style
-    };
+    // var style = {
+    //     backgroundColor: event.color,
+    //     color: 'black',
+    // };
+    // return {
+    //     style: style
+    // };
 }
-const resources = [{
-  id: 'a',
-  title: 'Room A'
-}, {
-  id: 'b',
-  title: 'Room B'
-}, {
-  id: 'c',
-  title: 'Room C'
-}]
+const resources = employees?.map (e => {return{id:e.id, title:e.name}})
 
   return (
     <>
-    <Link to="/"><button>User</button></Link>
+    <Link to={`/${id}`}><button>User</button></Link>
     <div style={{ marginTop: "25px", height: "80vh" }}>
       <Calendar
         localizer={localizer}
@@ -63,6 +57,7 @@ const resources = [{
             title:d.title,
             start:new Date(d.start),
             end:new Date(d.end),
+            resourceId:d.resourceId,
             color:"grey"
             }
         })}

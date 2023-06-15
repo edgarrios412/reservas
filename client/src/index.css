@@ -14,13 +14,6 @@
   -webkit-text-size-adjust: 100%;
 }
 
-.rbc-current-time-indicatorrbc-header{
-  background-color: red;
-}
-
-.rbc-event{
-  background-color: red; /* Cambia "red" por el color deseado */
-}
 
 a {
   font-weight: 500;

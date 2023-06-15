@@ -2,18 +2,20 @@ const { Router } = require("express");
 const {getDates, getDatesFormat, postDate, deleteDate, putDate} = require("../controllers/dateControllers")
 const dateRoutes = Router()
 
-dateRoutes.get("/", async (req,res) => {
+dateRoutes.get("/:id", async (req,res) => {
+    const {id} = req.params
     try{
-        const dates = await getDates()
+        const dates = await getDates(id)
         res.status(200).json(dates)
     }catch(e){
         res.status(404).json({message:e})
     }
 })
 
-dateRoutes.get("/format", async (req,res) => {
+dateRoutes.get("/format/:id/:expertId", async (req,res) => {
+    const {id, expertId} = req.params
     try{
-        const dates = await getDatesFormat()
+        const dates = await getDatesFormat(id, expertId)
         res.status(200).json(dates)
     }catch(e){
         res.status(404).json({message:e})

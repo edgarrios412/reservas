@@ -1,10 +1,20 @@
 const { Router } = require("express");
-const {getUsers, postUser, deleteUser, putUser} = require("../controllers/userControllers")
+const {getUsers, postUser, deleteUser, putUser, getEmployees} = require("../controllers/userControllers")
 const userRoutes = Router()
 
 userRoutes.get("/", async (req,res) => {
     try{
         const users = await getUsers()
+        res.status(200).json(users)
+    }catch(e){
+        res.status(404).json({message:e})
+    }
+})
+
+userRoutes.get("/:id", async (req,res) => {
+    const {id} = req.params
+    try{
+        const users = await getEmployees(id)
         res.status(200).json(users)
     }catch(e){
         res.status(404).json({message:e})

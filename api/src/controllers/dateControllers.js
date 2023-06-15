@@ -3,12 +3,21 @@ const format = require("../helpers/formatDate.js")
 const interval = require("../helpers/intervalDate.js")
 
 module.exports = {
-    getDates: async () => {
-        const dates = await Date.findAll()
+    getDates: async (id) => {
+        const dates = await Date.findAll({
+            where:{
+                companyId: id
+            }
+        })
         return dates
     },
-    getDatesFormat: async () => {
-        const dates = await Date.findAll()
+    getDatesFormat: async (id, expertId) => {
+        const dates = await Date.findAll({
+            where:{
+                companyId: id,
+                resourceId: expertId
+            }
+        })
         const intervalos = [] 
         dates.map(d => {
             const i = interval(format(d.start),format(d.end))

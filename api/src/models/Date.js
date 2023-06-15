@@ -17,5 +17,8 @@ module.exports = (sequelize) => {
     start:{
       type: DataTypes.STRING,
     },
+    resourceId:{
+      type: DataTypes.INTEGER,
+    }
   },{timestamps:false});
 };
