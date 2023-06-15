@@ -16,33 +16,40 @@ const diferenciaMinute = (tiempoInicial, tiempoFinal) => {
     return diferenciaEnMinutos;
   }
 
-const divideHours = (start, end) => {
+const intervalDate = (start, end) => {
     const originalArray = [start, end];
     const convertedArray = [];
 
-  const startTime = originalArray[0];
-  const endTime = originalArray[1];
+  const startTime = originalArray[0].slice(-5);
+  const endTime = originalArray[1].slice(-5);
 
   let currentTime = startTime;
-    let i = 0;
+    let i = 1;
     let x = diferenciaMinute(startTime,endTime)/20
-  while (i <= x) {
-    convertedArray.push(currentTime);
-    i++
-    // Incrementa 20 minutos al tiempo actual
+
     const [hours, minutes] = currentTime.split(":");
-    const currentDate = new Date();
-    currentDate.setHours(hours);
+      const currentDate = new Date();
+    currentDate.setUTCHours(hours);
     currentDate.setMinutes(minutes);
-    currentDate.setMinutes(currentDate.getMinutes() + 20);
+    currentDate.setMinutes(currentDate.getMinutes());
     currentTime = `${String(currentDate.getHours()).padStart(2, "0")}:${String(
       currentDate.getMinutes()
-    ).padStart(2, "0")}`;
+      ).padStart(2, "0")}`;
+      convertedArray.push(start.slice(0,-5)+currentTime);
+  while (i <= x-1) {
+      i++
+      // Incrementa 10 minutos al tiempo actual
+      const [hours, minutes] = currentTime.split(":");
+      const currentDate = new Date();
+      currentDate.setHours(hours);
+      currentDate.setMinutes(minutes);
+      currentDate.setMinutes(currentDate.getMinutes() + 20);
+      currentTime = `${String(currentDate.getHours()).padStart(2, "0")}:${String(
+          currentDate.getMinutes()
+          ).padStart(2, "0")}`;
+          convertedArray.push(start.slice(0,-5)+currentTime);
   }
   return convertedArray
 }
 
-export default divideHours
-
-// console.log(divideHours("7:00", "7:10"))
-// console.log("Hol")
+module.exports = intervalDate

@@ -21,17 +21,16 @@ const User = () => {
 
   const [fecha, setFecha] = useState(null);
   const [hora, setHora] = useState(null);
-  const [disable, setDisable] = useState(["2023-06-10", "2023-06-11"]);
+  const [disable, setDisable] = useState(["2023-06-10", "2023-06-11"]); // TODO: Hacer que bloquee las fechas llenas
 
   const flatpickrOptions = {
     locale: Spanish,
     minDate: dayjs(new Date()).format("YYYY-MM-DD"),
     enableTime: false,
-    disable: disable, // Bloquear dias
-    isOpen: true, // Establecer como abierto
-    // Otras opciones de configuración
+    disable: disable
   };
   const [date, setDates] = useState([]);
+
 
   const horas = divideHours("07:00","13:00");
 
@@ -39,28 +38,18 @@ const User = () => {
     setHora(hora);
     setModal(false)
     const end = sumMinutes(hora+":00",duration)
-    const hours = divideHours(hora,end)
-    const arr = []
-    for(let i = 0; i < hours.length-1; i++){
-      arr.push(fecha + hours[i])
-    }
-    setDates([...date, ...arr]);
     const newDate = {
       title: "Cliente",
       start: new Date(fecha + "T" + hora + ":00"),
       end: new Date(fecha + "T" + end),
     };
     await axios.post("/date", newDate);
-    // if (date.filter((a) => a.includes(fecha)).length > 4) {
-    //   // alert("fecha desabilitada");
-    //   setDisable([...disable, fecha]);
-    // }
+    const enUso = await axios.get("/date/format")
+    setDates(enUso.data)
   };
 
   const test = (hora) => {
-    // ["8:00","8:20","8:40"]
     const horas = divideHours(hora, sumMinutes(hora+":00",duration))
-    // console.log(horas)
     for(let i = 0; i < horas.length-1; i++){
     if(!date.includes(fecha + horas[i])){
     continue;
@@ -69,6 +58,10 @@ const User = () => {
     }
     return true
   }
+
+  useEffect(() => {
+    axios.get("/date/format").then((data) => setDates(data.data))
+  },[fecha])
 
   return (
     <>

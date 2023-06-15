@@ -1,9 +1,21 @@
 const {Date} = require("../db.js")
+const format = require("../helpers/formatDate.js")
+const interval = require("../helpers/intervalDate.js")
 
 module.exports = {
     getDates: async () => {
         const dates = await Date.findAll()
         return dates
+    },
+    getDatesFormat: async () => {
+        const dates = await Date.findAll()
+        const intervalos = [] 
+        dates.map(d => {
+            const i = interval(format(d.start),format(d.end))
+            intervalos.push(...i)
+        })
+
+        return Array.from(new Set(intervalos))
     },
     postDate: async (date) => {
         const newDate = await Date.create(date)
