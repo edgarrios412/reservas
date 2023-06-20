@@ -3,6 +3,9 @@ import organization from "../../assets/organization.jpg";
 import problems from "../../assets/problems.jpg";
 import alltime from "../../assets/alltime.jpg";
 import bg from "../../assets/bg.png";
+import laptop from "../../assets/laptop.png";
+import tlf from "../../assets/tlf.png";
+import googleplay from "../../assets/googleplay.png";
 import Nav from "../Nav/Nav";
 import lottie from "lottie-web";
 import { defineElement } from "lord-icon-element";
@@ -140,12 +143,31 @@ const Home = () => {
         </div>
       </div>
       <div className={style.view3}>
-        <h2 className={style.title2}>Nuestros precios</h2>
+        <iframe className={style.video} width="540" height="350" src="https://www.youtube.com/embed/M43UDapvU4k" title="VIDEO PUBLICITARIO" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <img src={laptop} className={style.laptop}/>
       </div>
       <div className={style.view4}>
-        <h2 className={style.title2}>Nuestros clientes</h2>
+        <h2 className={style.title2} style={{color:"white"}}>Nuestros precios</h2>
+        <div className={style.planes}>
+          <div className={style.plan}></div>
+          <div className={style.plan}></div>
+          <div className={style.plan}></div>
+        </div>
       </div>
-      
+      <div className={style.view5}>
+        <h2 className={style.title2}>Nuestros clientes</h2>
+  
+      </div>
+      <div className={style.view6}>
+        <div className={style.description}>
+        <h2 className={style.title3}>Reserva y gestiona tu cita desde tu celular</h2>
+        <p className={style.descriptionapp}>Todo al alcance de tus manos app en desarrollo pero ya proximamente estará disponible para que la descargues en Google Play</p>
+        <img src={googleplay} className={style.buttonGoogle} onClick={() => alert("Open google")}/>
+        </div>
+        <div className={style.imgContainer}>
+        <img src={tlf} className={style.tlf}/>
+        </div>
+      </div>
     </>
   );
 };

@@ -35,7 +35,7 @@
 
 .button{
     background-color: white;
-    color: #00715e;
+    color: #ffffff;
     padding: 0.6em 1.2em;
     border-radius: 8px;
     font-size: 1.3em;
@@ -43,6 +43,13 @@
     cursor: pointer;
     position: relative;
     transition: .4s;
+    animation: color .5s 1s ease-in-out forwards;
+}
+
+@keyframes color {
+    100%{
+        color: #00715e;
+    }
 }
 
 .button::before {
@@ -58,7 +65,7 @@
   }
   
   .button:hover{
-    color:white
+    color:rgb(0, 0, 0)
   }
 
   .button:hover::before {
@@ -137,7 +144,89 @@
     height: 85vh;
 }
 
+.laptop{
+    width: 700px;
+    display: inline-block;
+  transform: translateY(-10px); /* Mueve la imagen hacia arriba */
+  transition: transform 0.3s ease-in-out; /* Añade una transición suave */
+  filter: drop-shadow(0 30px 10px rgba(0, 0, 0, 0.25)); /* Agrega una sombra */
+}
+
+.video{
+    position: absolute;
+    left: 50%;
+    margin-top: 20px;
+    /* top: 50%; */
+    transform: translateX(-50%);
+}
+
 .view4{
+    padding: 50px 0px;
     margin-top: 100px;
     height: 85vh;
+    background-color: #077b68;
+}
+
+.planes{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.plan{
+    width: 275px;
+    height: 400px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+}
+
+
+.view5{
+    margin-top: 100px;
+    height: 85vh;
+}
+
+.view6{
+    margin-top: 100px;
+    padding: 50px 0px;
+    height: 40vh;
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-evenly;
+    background-color: rgb(233, 233, 233);
+    overflow: hidden;
+    margin-bottom: 100px;
+}
+
+.description{
+    display: flex;
+    flex-direction: column;
+}
+
+.title3{
+    color: #00715e;
+    text-align: start;
+    width: 400px;
+    font-size: 2em;
+    margin:0;
+}
+
+.descriptionapp{
+    text-align: justify;
+    width: 400px;
+    font-size: .9em;
+    color: rgb(69, 69, 69);
+}
+
+.buttonGoogle{
+    max-width: 170px;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.buttonGoogle:hover{
+    scale:1.05;
+}
+
+.tlf{
+    min-height: 500px;
 }
