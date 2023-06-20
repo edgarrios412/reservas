@@ -49,6 +49,7 @@ const resources = employees?.map (e => {return{id:e.id, title:e.name}})
   return (
     <>
     <Link to={`/${id}`}><button>User</button></Link>
+    <Link to={`/${id}/config`}><button>Config</button></Link>
     <div style={{ marginTop: "25px", height: "80vh" }}>
       <Calendar
         localizer={localizer}

@@ -87,7 +87,7 @@ const User = () => {
           </div>
           </div>
           </div>}
-      <div style={{marginBottom:"20px"}}><Link to={`/panel/${id}`}>
+      <div style={{marginBottom:"20px"}}><Link to={`/${id}/panel`}>
         <button>Panel</button>
       </Link></div>
       {step == 0 && (
